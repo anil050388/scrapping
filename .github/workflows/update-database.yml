@@ -22,8 +22,7 @@ jobs:
 
             - name: Run Script
               env:
-                user: ${{ secrets.name }}
-                password: ${{ secrets.password }}
+                MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
               run: |
                 python web_scrapping.py
 
