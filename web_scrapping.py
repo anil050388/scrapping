@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 import os
 
 #Import the DB password
-load_dotenv()
-password = os.environ['password']
-user = os.environ['user']
+# load_dotenv()
+# password = os.environ['password']
+# user = os.environ['user']
 
 
 #Scrap the list of S&P
@@ -20,7 +20,7 @@ symbol_list = payload[0]
 symbol_list.to_csv('SAP500_symbol_list.csv')
 
 #Establish a Client Connection
-MONGODB_CONNECTION_STRING = "mongodb+srv://"+user+":"+password+"@cluster0.thkfce7.mongodb.net/?retryWrites=true&w=majority"
+MONGODB_CONNECTION_STRING = os.environ['MONGODB_CONNECTION_STRING']
 client = MongoClient(MONGODB_CONNECTION_STRING)
 
 # to check if connection has been established
