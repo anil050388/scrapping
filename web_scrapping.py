@@ -23,7 +23,7 @@ symbol_dict = symbol_list.to_dict('records')
 db = client.symbolsDB
 
 # emtpy symbols collection before inserting new documents
-db.symbols.drop()
+#db.symbols.drop()
 
 # insert new documents to collection
 db.symbols.insert_many(symbol_dict)
