@@ -24,7 +24,8 @@ MONGODB_CONNECTION_STRING = os.environ['MONGODB_CONNECTION_STRING']
 client = MongoClient(MONGODB_CONNECTION_STRING)
 
 # to check if connection has been established
-client.server_info()['ok']
+# print(client.server_info()['ok'])
+# client.server_info()['ok']
 
 # convert to dictionary for uploading to MongoDB
 symbol_dict = symbol_list.to_dict('records')
