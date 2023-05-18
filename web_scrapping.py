@@ -1,31 +1,20 @@
-#Import packages
+# import packages
 import pandas as pd
-import lxml
 from pymongo import MongoClient
-from dotenv import load_dotenv
 import os
 
-#Import the DB password
-# load_dotenv()
-# password = os.environ['password']
-# user = os.environ['user']
-
-
-#Scrap the list of S&P
+# scrape the list of S&P 500
 url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
 payload = pd.read_html(url)
 symbol_list = payload[0]
 
-#Save to Local CSV files
-symbol_list.to_csv('SAP500_symbol_list.csv')
+# save to local csv file
+symbol_list.to_csv('SAP500_symbol_list.csv', index=False)
 
-#Establish a Client Connection
+# push symbol list to MongoDB
+# establish a client connection to MongoDB
 MONGODB_CONNECTION_STRING = os.environ['MONGODB_CONNECTION_STRING']
 client = MongoClient(MONGODB_CONNECTION_STRING)
-
-# to check if connection has been established
-# print(client.server_info()['ok'])
-# client.server_info()['ok']
 
 # convert to dictionary for uploading to MongoDB
 symbol_dict = symbol_list.to_dict('records')
@@ -33,12 +22,8 @@ symbol_dict = symbol_list.to_dict('records')
 # point to symbolsDB collection 
 db = client.symbolsDB
 
-# emtpy symbols collection before inserting new records
+# emtpy symbols collection before inserting new documents
 db.symbols.drop()
 
-# insert new symbols
+# insert new documents to collection
 db.symbols.insert_many(symbol_dict)
-
-
-
-#Push the list to MangoDB
