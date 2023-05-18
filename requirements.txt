@@ -1,4 +1,4 @@
-lxml==4.9.2
-pandas==2.0.1
-pymongo==4.3.3
-python-dotenv==1.0.0
+lxml
+pandas
+pymongo
+python-dotenv
